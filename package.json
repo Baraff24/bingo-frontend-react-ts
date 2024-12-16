@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-animated-popup": "^0.1.9",
     "react-dom": "^18.3.1",
     "react-icons": "^5.3.0",
     "swr": "^2.2.5",

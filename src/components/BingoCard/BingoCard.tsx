@@ -1,5 +1,4 @@
 import React from "react";
-import Popup from "react-animated-popup";
 import BingoCardBackgroundImage from "../../assets/images/bingo-card-background.png";
 import { BingoCardType } from "../../types/bingo";
 
@@ -9,15 +8,12 @@ interface BingoCardProps {
   onClose: () => void;
 }
 
-const BingoCardComponent: React.FC<BingoCardProps> = ({ card, visible, onClose }) => {
+const BingoCardComponent: React.FC<BingoCardProps> = ({ card }) => {
   return (
     <div
       className="relative bg-cover bg-center rounded-lg shadow-lg p-4 m-4 w-full sm:w-1/2 lg:w-1/3"
       style={{ backgroundImage: `url(${BingoCardBackgroundImage})` }}
     >
-      <Popup visible={visible} onClose={onClose}>
-        <p className="text-red-500 font-bold text-xl">TOMBOLA!</p>
-      </Popup>
 
       <p className="text-white text-left font-bold mb-2">{card.card_id}</p>
 
