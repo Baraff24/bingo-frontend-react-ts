@@ -29,7 +29,7 @@ const BingoCardComponent: React.FC<BingoCardProps> = ({ card }) => {
                 <div
                   key={`${rowIndex}-${cellIndex}`}
                   className={`flex items-center justify-center rounded-md border-2 border-blue-600 ${
-                    isEmpty ? "bg-transparent w-10 h-10 md:w-14 md:h-14" : "bg-white w-10 h-10 md:w-12 md:h-12"
+                    isEmpty ? "bg-transparent w-10 h-10 md:w-12 md:h-12" : "bg-white w-10 h-10 md:w-12 md:h-12"
                   } transition-all duration-200`}
                 >
                   <button
@@ -38,8 +38,8 @@ const BingoCardComponent: React.FC<BingoCardProps> = ({ card }) => {
                       isEmpty
                         ? "cursor-not-allowed bg-black text-black"
                         : isSelected
-                        ? "bg-transparent text-white border-2 border-white"
-                        : "bg-blue-700 text-white"
+                        ? "bg-blue-700 text-white border-2 border-white"
+                        : "bg-blue-500 text-white hover:bg-blue-600"
                     }`}
                     aria-label={
                       isEmpty
