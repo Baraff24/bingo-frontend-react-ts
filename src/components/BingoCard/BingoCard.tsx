@@ -16,7 +16,7 @@ const BingoCardComponent: React.FC<BingoCardProps> = ({ card }) => {
       >
 
         <div className="flex justify-start w-full mb-4">
-          <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center">
+          <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center">
             <span className="text-black font-bold">{card.card_id}</span>
           </div>
         </div>
