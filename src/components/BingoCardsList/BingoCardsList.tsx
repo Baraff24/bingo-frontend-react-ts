@@ -25,8 +25,8 @@ const BingoCardsList: React.FC = () => {
    * If playerId is not set, the URL is null to prevent fetching.
    */
   const bingoCardsUrl = playerId
-    ? `${API_URL_BINGO_CARDS_LIST}?playerId=${playerId}`
-    : null;
+      ? `${API_URL_BINGO_CARDS_LIST}?playerId=${playerId}`
+      : null;
 
   /**
    * Hook to fetch Bingo Cards data.
@@ -64,47 +64,47 @@ const BingoCardsList: React.FC = () => {
    * @param ballNumbers - Array of numbers that have been drawn.
    */
   const updateCardData = useCallback(
-    (ballNumbers: string[]) => {
-      if (bingoCardsData && bingoBallsData) {
-        let tombola = true;
+      (ballNumbers: string[]) => {
+        if (bingoCardsData && bingoBallsData) {
+          let tombola = true;
 
-        // Update each card based on the drawn ball numbers
-        const updatedCards = bingoCardsData.map((whole_card) => {
-          const updatedCard: BingoCardType = { ...whole_card };
-          updatedCard.card = updatedCard.card.map((row: BingoCell[]) =>
-            row.map((cell) => {
-              if (
-                !cell.crossed_out &&
-                ballNumbers.includes(cell.number) &&
-                cell.number !== "0"
-              ) {
-                return { ...cell, crossed_out: true };
-              }
-              if (!cell.crossed_out && cell.number !== "0") {
-                tombola = false;
-              }
-              return cell;
-            })
-          );
-          return updatedCard;
-        });
-
-        // If all relevant numbers are crossed out, show the tombola popup
-        if (tombola) {
-          setVisible(true);
-        }
-
-        // Update the Bingo Cards data without revalidating
-        mutateBingoCards(updatedCards, false)
-          .then(() => {
-            console.log("Bingo Cards data updated successfully.");
-          })
-          .catch((error) => {
-            console.error("Error updating Bingo Cards data:", error);
+          // Update each card based on the drawn ball numbers
+          const updatedCards = bingoCardsData.map((whole_card) => {
+            const updatedCard: BingoCardType = { ...whole_card };
+            updatedCard.card = updatedCard.card.map((row: BingoCell[]) =>
+                row.map((cell) => {
+                  if (
+                      !cell.crossed_out &&
+                      ballNumbers.includes(cell.number) &&
+                      cell.number !== "0"
+                  ) {
+                    return { ...cell, crossed_out: true };
+                  }
+                  if (!cell.crossed_out && cell.number !== "0") {
+                    tombola = false;
+                  }
+                  return cell;
+                })
+            );
+            return updatedCard;
           });
-      }
-    },
-    [bingoCardsData, bingoBallsData, mutateBingoCards]
+
+          // If all relevant numbers are crossed out, show the tombola popup
+          if (tombola) {
+            setVisible(true);
+          }
+
+          // Update the Bingo Cards data without revalidating
+          mutateBingoCards(updatedCards, false)
+              .then(() => {
+                console.log("Bingo Cards data updated successfully.");
+              })
+              .catch((error) => {
+                console.error("Error updating Bingo Cards data:", error);
+              });
+        }
+      },
+      [bingoCardsData, bingoBallsData, mutateBingoCards]
   );
 
   /**
@@ -125,12 +125,12 @@ const BingoCardsList: React.FC = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       mutateBingoBalls()
-        .then(() => {
-          console.log("Bingo Balls data revalidated successfully.");
-        })
-        .catch((error) => {
-          console.error("Error revalidating Bingo Balls data:", error);
-        });
+          .then(() => {
+            console.log("Bingo Balls data revalidated successfully.");
+          })
+          .catch((error) => {
+            console.error("Error revalidating Bingo Balls data:", error);
+          });
     }, 20000); // 20 seconds
 
     return () => clearInterval(intervalId); // Cleanup on unmount
@@ -154,7 +154,7 @@ const BingoCardsList: React.FC = () => {
    * @param event - Change event.
    */
   const handleSearchChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+      event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setSearchTerm(event.target.value);
   };
@@ -164,12 +164,12 @@ const BingoCardsList: React.FC = () => {
    * Maps each card to the BingoCard component.
    */
   const bingoCards = bingoCardsData?.map((card) => (
-    <BingoCard
-      key={card.card_id} // Unique identifier for each card
-      card={card}
-      visible={visible}
-      onClose={() => setVisible(false)}
-    />
+      <BingoCard
+          key={card.card_id} // Unique identifier for each card
+          card={card}
+          visible={visible}
+          onClose={() => setVisible(false)}
+      />
   ));
 
   /**
@@ -178,38 +178,38 @@ const BingoCardsList: React.FC = () => {
    */
   if (bingoCardsError || bingoBallsError) {
     return (
-      <div className="container mx-auto p-4">
-        <form
-          onSubmit={handleSearchSubmit}
-          className="flex flex-col sm:flex-row items-center mb-4"
-        >
-          <input
-            className="border border-gray-300 text-black rounded py-2 px-4 focus:outline-blue-500 focus:ring-2 focus:ring-blue-500"
-            type="text"
-            placeholder="Enter your ID (6 characters)..."
-            value={searchTerm}
-            onChange={handleSearchChange}
-            maxLength={6}
-          />
-          <button
-            className="mt-2 sm:mt-0 sm:ml-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors duration-200"
-            type="submit"
-            disabled={searchTerm.trim().length !== 6}
+        <div className="container mx-auto p-4">
+          <form
+              onSubmit={handleSearchSubmit}
+              className="flex flex-col sm:flex-row items-center mb-4"
           >
-            Search
+            <input
+                className="border border-gray-300 text-black rounded py-2 px-4 focus:outline-blue-500 focus:ring-2 focus:ring-blue-500"
+                type="text"
+                placeholder="Enter your ID (6 characters)..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+                maxLength={6}
+            />
+            <button
+                className="mt-2 sm:mt-0 sm:ml-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors duration-200"
+                type="submit"
+                disabled={searchTerm.trim().length !== 6}
+            >
+              Search
+            </button>
+          </form>
+          <p className="text-red-500">
+            There was an error loading the cards.
+            {bingoCardsError && <span> {String(bingoCardsError)}</span>}
+          </p>
+          <button
+              onClick={loadData}
+              className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors duration-200"
+          >
+            Retry
           </button>
-        </form>
-        <p className="text-red-500">
-          There was an error loading the cards.
-          {bingoCardsError && <span> {String(bingoCardsError)}</span>}
-        </p>
-        <button
-          onClick={loadData}
-          className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors duration-200"
-        >
-          Retry
-        </button>
-      </div>
+        </div>
     );
   }
 
@@ -219,9 +219,9 @@ const BingoCardsList: React.FC = () => {
    */
   if (bingoCardsLoading || bingoBallsLoading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-16 w-16"></div>
-      </div>
+        <div className="flex justify-center items-center h-screen">
+          <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-16 w-16"></div>
+        </div>
     );
   }
 
@@ -230,37 +230,37 @@ const BingoCardsList: React.FC = () => {
    * Displays the search form, bingo cards, and footer with social icons.
    */
   return (
-    <div className="container mx-auto p-4">
-      <form
-        onSubmit={handleSearchSubmit}
-        className="flex flex-col sm:flex-row items-center mb-4"
-      >
-        <input
-          className="border border-gray-300 text-black rounded py-2 px-4 focus:outline-blue-500 focus:ring-2 focus:ring-blue-500"
-          type="text"
-          placeholder="Enter your ID (6 characters)..."
-          value={searchTerm}
-          onChange={handleSearchChange}
-          maxLength={6}
-        />
-        <button
-          className="mt-2 sm:mt-0 sm:ml-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors duration-200"
-          type="submit"
-          disabled={searchTerm.trim().length !== 6}
+      <div className="container mx-auto p-4">
+        <form
+            onSubmit={handleSearchSubmit}
+            className="flex flex-col sm:flex-row items-center mb-4 justify-center"
         >
-          Search
-        </button>
-      </form>
+          <input
+              className="border border-gray-300 text-black rounded py-2 px-4 focus:outline-blue-500 focus:ring-2 focus:ring-blue-500"
+              type="text"
+              placeholder="Enter your ID (6 characters)..."
+              value={searchTerm}
+              onChange={handleSearchChange}
+              maxLength={6}
+          />
+          <button
+              className="mt-2 sm:mt-0 sm:ml-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors duration-200"
+              type="submit"
+              disabled={searchTerm.trim().length !== 6}
+          >
+            Search
+          </button>
+        </form>
 
-      <div className="flex flex-wrap justify-center">
-        {bingoCards && bingoCards.length > 0 ? (
-          bingoCards
-        ) : (
-          playerId && <p className="text-gray-600">No cards found.</p> // Only show message if playerId is set
-        )}
+        <div className="flex flex-wrap justify-center">
+          {bingoCards && bingoCards.length > 0 ? (
+              bingoCards
+          ) : (
+              playerId && <p className="text-gray-600">No cards found.</p> // Only show message if playerId is set
+          )}
+        </div>
+
       </div>
-
-    </div>
   );
 };
 
