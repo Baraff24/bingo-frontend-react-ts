@@ -10,7 +10,7 @@ export type BingoCell = z.infer<typeof BingoCellSchema>;
 
 // Definition of the BingoCard schema and type
 export const BingoCardSchema = z.object({
-  card_id: z.string(),
+  card_id: z.number(),
   card: z.array(z.array(BingoCellSchema)),
 });
 
