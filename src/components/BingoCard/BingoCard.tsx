@@ -11,12 +11,12 @@ interface BingoCardProps {
 const BingoCardComponent: React.FC<BingoCardProps> = ({ card }) => {
   return (
       <div
-          className="relative bg-cover bg-center rounded-xl shadow-lg p-6 m-4 w-full sm:w-1/2 xl:w-1/3 flex flex-col items-center"
+          className="relative bg-cover bg-center rounded-xl shadow-lg p-6 m-2 w-full sm:w-1/2 xl:w-1/3 flex flex-col items-center"
           style={{backgroundImage: `url(${BingoCardBackgroundImage})`}}
       >
 
         <div className="flex justify-start w-full mb-4">
-          <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center">
             <span className="text-black font-bold">{card.card_id}</span>
           </div>
         </div>
