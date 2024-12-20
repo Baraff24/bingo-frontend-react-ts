@@ -18,7 +18,10 @@ export type BingoCardType = z.infer<typeof BingoCardSchema>;
 
 // Definition of the BingoBall schema and type
 export const BingoBallSchema = z.object({
-  number: z.string(),
+  id: z.number(),
+  number: z.number(),
+  drawn: z.boolean(),
+  drawn_at: z.string(),
 });
 
 export type BingoBall = z.infer<typeof BingoBallSchema>;
