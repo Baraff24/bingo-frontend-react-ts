@@ -25,7 +25,7 @@ const BingoCardsList: React.FC = () => {
      * If playerId is not set, the URL is null to prevent fetching.
      */
     const bingoCardsUrl = playerId
-        ? `${API_URL_BINGO_CARDS_LIST}?playerId=${playerId}`
+        ? `${API_URL_BINGO_CARDS_LIST}?search=${playerId}`
         : null;
 
     /**
